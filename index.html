@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wang Yung-An - Portfolio</title>
     <style>
-        /* 移除邊距，設定深色背景，確保全螢幕沉浸感 */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -36,21 +35,24 @@
             border-radius: 5px; 
             font-weight: bold;
         }
-        /* 行動裝置防錯：手機瀏覽器易遮蔽內嵌 PDF 或使超連結失效，故強制切換為直接開啟按鈕 */
+        
+        /* 行動裝置視圖：隱藏 PDF 框架，顯示獨立的按鈕區塊 */
         @media (max-width: 768px) {
             .pdf-embed { display: none; }
             .mobile-fallback { display: block; }
+            body, html { overflow: auto; } /* 確保行動裝置可以滾動 */
         }
     </style>
 </head>
 <body>
-    <!-- 將 data 屬性與 a href 屬性指向您的 PDF 檔名 -->
-    <object data="portfolio.pdf" type="application/pdf" class="pdf-embed">
-        <div class="mobile-fallback" style="display: block;">
-            <h2>請直接開啟 PDF 檔案</h2>
-            <p>為確保互動式超連結與完整排版正常運作，請點擊下方按鈕閱讀。</p>
-            <a href="portfolio.pdf" target="_blank">檢視完整作品集</a>
-        </div>
-    </object>
+    <!-- 使用 iframe 替代 object，在現代瀏覽器中支援度更穩定 -->
+    <iframe src="portfolio.pdf" class="pdf-embed" title="Portfolio"></iframe>
+    
+    <!-- 備用區塊必須獨立於 iframe 之外 -->
+    <div class="mobile-fallback">
+        <h2>請直接開啟 PDF 檔案</h2>
+        <p>為確保互動式超連結與完整排版正常運作，請點擊下方按鈕閱讀。</p>
+        <a href="portfolio.pdf" target="_blank">檢視完整作品集</a>
+    </div>
 </body>
 </html>
